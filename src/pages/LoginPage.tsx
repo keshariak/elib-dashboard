@@ -9,8 +9,20 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useRef } from "react"
+
+
+
 
 export function Loginpage() {
+  const emailref = useRef(0);
+  const passref = useRef(null)
+
+  const submitHandler= ()=>{
+    const email = emailref.current?.value;
+    const password = passref.current?.value;
+    console.log("user", {email, password})
+  }
   return (
     <section className="flex justify-center items-center h-screen">
     <Card className="mx-auto max-w-sm">
@@ -25,9 +37,10 @@ export function Loginpage() {
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
-              id="email"
+          ref={emailref}
               type="email"
               placeholder="asasm@gmail.com"
+              
               required
             />
           </div>
@@ -38,9 +51,9 @@ export function Loginpage() {
                 Forgot your password?
               </Link>
             </div>
-            <Input id="password" type="password" required />
+            <Input ref={passref} id="password" type="password" required />
           </div>
-          <Button type="submit" className="w-full">
+          <Button onClick={submitHandler} type="submit" className="w-full">
             Login
           </Button>
           <Button variant="outline" className="w-full">
